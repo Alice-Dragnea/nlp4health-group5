@@ -1,7 +1,10 @@
+import os
 from flask import Flask, request, jsonify
+from flask_cors import CORS
 from ..finetuning.model import isTrigger
 
 trigger_route = Flask(__name__)
+CORS(trigger_route)
 
 @trigger_route.route('/isTrigger', methods=['POST'])
 def isTriggerRoute():
@@ -30,4 +33,8 @@ def isTriggerRoute():
         }), 500
 
 if __name__ == '__main__':
-    trigger_route.run(debug=True)
+    trigger_route.run(
+        host='0.0.0.0', 
+        port=int(os.getenv('PORT', 5000)), 
+        debug=True
+    )
