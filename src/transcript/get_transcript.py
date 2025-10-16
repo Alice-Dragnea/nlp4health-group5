@@ -28,76 +28,54 @@ def get_transcript_ids():
     return transcript_ids
 
 def get_transcript(transcript_id):
-    pass
-
-# user_id defines who is having the conversation, e.g. steve, john.doe@gmail.com, username_464
-def interact(user_id, request):
-    global buttons
-
-    response = requests.post(
-        f'https://general-runtime.voiceflow.com/state/user/ID/interact',
-        json={ 'request': request },
-        headers={ 
-            'Authorization': api_key,
-            'versionID': 'production'
-        },
-    )
-
-    for trace in response.json():
-        if trace['type'] == 'text':
-            print(trace['payload']['message'])
-        elif trace['type'] == "choice":
-            buttons = trace['payload']['buttons']
-            print("Choose one of the following:")
-            for i in range(len(buttons)):
-                print(f"{i+1}. {buttons[i]['name']}")
-        elif trace['type'] == 'end':
-            # an end trace means the the voiceflow dialog has ended
-            return False
-        else:
-            print("Unhandled trace")
-            print(trace)
-    # the dialog is still running
-    return True
-
-def save_transcript(user_id):
-    url = "https://api.voiceflow.com/v2/transcripts"
-
-    payload = {
-        "projectID": projectID,
-        "versionID": versionID,
-        "sessionID": user_id
-    }
+    url = f'https://analytics-api.voiceflow.com/v1/transcript/{transcript_id}'
     headers = {
-        "accept": "application/json",
-        "content-type": "application/json",
-        "Authorization": api_key
+        "Authorization": api_key,
+        "accept": "application/json"
     }
+    
+    response = requests.get(url, headers=headers)
 
-    response = requests.put(url, json=payload, headers=headers)
+    if response.status_code != 200:
+        print("Error:", response.status_code, response.text)
+        return []
 
-    print("Saved transcript with code " + str(response.status_code))
+    data = response.json()
+    return _extract_conversation(data)
+
+def _extract_conversation(transcript_data):
+    """Extract just the conversation messages from transcript data"""
+    if not transcript_data or 'transcript' not in transcript_data:
+        return []
+    
+    logs = transcript_data['transcript'].get('logs', [])
+    conversation = []
+    
+    for log in logs:
+        # Assistant messages (text responses)
+        if log.get('type') == 'trace' and log.get('data', {}).get('type') == 'text':
+            message = log['data']['payload'].get('message', '')
+            if message:  # Only add if there's actual content
+                conversation.append({
+                    'speaker': 'assistant',
+                    'message': message,
+                })
+        
+        # User messages (text input from user)
+        elif log.get('type') == 'action' and log.get('data', {}).get('type') == 'text':
+            message = log['data'].get('payload', '')
+            if message:  # Only add if there's actual content
+                conversation.append({
+                    'speaker': 'user',
+                    'message': message,
+                    'timestamp': log.get('createdAt')
+                })
+    
+    return conversation
 
 
 if __name__ == "__main__":
     transcript_ids = get_transcript_ids()
-    print(transcript_ids)
-
-
-"""name = input('> What is your name?\n')
-isRunning = interact(name, { 'type': 'launch' })
-
-while (isRunning):
-    if (len(buttons) > 0):
-        buttonSelection = input('> Choose a button number, or a reply\n')
-        try:
-            isRunning = interact(name, buttons[int(buttonSelection) - 1]["request"])
-        except:
-            isRunning = interact(name, { 'type': 'text', 'payload': buttonSelection })
-        buttons = []
-    else:
-        nextInput = input('> Say something\n')
-        isRunning = interact(name, { 'type': 'text', 'payload': nextInput })
-    save_transcript(name)
-
-print("The conversation has ended.")"""
+    print(f"Here are the transcript ids: {transcript_ids}")
+    conversation = get_transcript(transcript_ids[4])
+    print(f"Here is the conversation: {conversation}")
