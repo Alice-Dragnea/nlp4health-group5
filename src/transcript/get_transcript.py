@@ -1,15 +1,31 @@
 import requests
 import os
+from dotenv import load_dotenv
 
-api_key = os.getenv('VOICEFLOW_API_KEY')
-projectID = os.getenv('VOICEFLOW_PROJECT_ID')
-versionID = os.getenv('VOICEFLOW_VERSION_ID')
+load_dotenv()
+
+api_key = os.getenv('VOICEFLOW_API_KEY').strip()
+projectID = os.getenv('VOICEFLOW_PROJECT_ID').strip()
+versionID = os.getenv('VOICEFLOW_VERSION_ID').strip()
 
 buttons = []
 
-
 def get_transcript_ids():
-    pass
+    url = f'https://analytics-api.voiceflow.com/v1/transcript/project/{projectID}'
+    headers = {
+        "Authorization": api_key,
+        "accept": "application/json"
+    }
+    
+    response = requests.post(url, headers=headers)
+
+    if response.status_code != 200:
+        print("Error:", response.status_code, response.text)
+        return []
+
+    data = response.json()
+    transcript_ids = [t["id"] for t in data.get("transcripts", [])]
+    return transcript_ids
 
 def get_transcript(transcript_id):
     pass
@@ -62,7 +78,13 @@ def save_transcript(user_id):
 
     print("Saved transcript with code " + str(response.status_code))
 
-name = input('> What is your name?\n')
+
+if __name__ == "__main__":
+    transcript_ids = get_transcript_ids()
+    print(transcript_ids)
+
+
+"""name = input('> What is your name?\n')
 isRunning = interact(name, { 'type': 'launch' })
 
 while (isRunning):
@@ -78,4 +100,4 @@ while (isRunning):
         isRunning = interact(name, { 'type': 'text', 'payload': nextInput })
     save_transcript(name)
 
-print("The conversation has ended.")
+print("The conversation has ended.")"""
