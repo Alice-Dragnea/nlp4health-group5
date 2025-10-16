@@ -3,7 +3,7 @@ from ..finetuning.model import isTrigger
 
 trigger_route = Flask(__name__)
 
-@trigger_route.route('/isTrigger', methods=['GET'])
+@trigger_route.route('/isTrigger', methods=['POST'])
 def isTriggerRoute():
     try:
         data = request.get_json()
