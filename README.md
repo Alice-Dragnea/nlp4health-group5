@@ -12,3 +12,9 @@
 - Alice Dragnea
 - Chris Gomez
 - Tanvi Patel
+
+### Run Server
+in root-directory, run `python -m src.routes.trigger_route`
+
+### Install Requirements
+`pip install -r requirements.txt`
