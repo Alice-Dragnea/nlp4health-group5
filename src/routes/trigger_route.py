@@ -1,7 +1,12 @@
 import os
+import sys
+
+project_root = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+sys.path.append(project_root)
+
 from flask import Flask, request, jsonify
 from flask_cors import CORS
-from ..finetuning.model import isTrigger
+from models.model import isTrigger
 
 trigger_route = Flask(__name__)
 CORS(trigger_route)
