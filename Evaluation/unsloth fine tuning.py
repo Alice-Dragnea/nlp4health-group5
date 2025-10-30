@@ -1,13 +1,10 @@
 
-# will delete this file since we're pretty much set with fine tuning but wanted to keep for 
+# will delete this file since we're pretty much set with fine tuning but wanted to keep for now
 
 # embedding model fine tuning example from https://enzokro.dev/blog/blog_post?fpath=blog%2F007_fine_tune_encoders%2Ffine_tune_encoders.ipynb
 
 #https://colab.research.google.com/github/timothelaborie/text_classification_scripts/blob/main/unsloth_classification.ipynb
 
-#can the pov influence classification accuracy? "the patient should vs you should..." bc we could use a model to restructure responses to fit format
-
-#how to use bert embeddings for classification?
 import unsloth
 
 # general imports
