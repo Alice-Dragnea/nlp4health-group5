@@ -28,17 +28,17 @@ def isTrigger(text: str):
     positive_words = ["fine", "okay", "good", "well", "better", "normal", "alright", "no issue", "not bad", "recovered"]
     symptom_words = ["sick", "sad", "dizzy", "pain", "hurt", "tired", "depressed", "anxious", "headache"]
 
-    # Case 1: Negation + symptom → Non-trigger
+   
     if any(n in lowered for n in negation_words) and any(s in lowered for s in symptom_words):
         if result["label"] == "Trigger":
             result["label"] = "Non-trigger"
 
-    # Case 2: Negation + positive → Trigger (reverse of earlier mistake)
+
     elif any(n in lowered for n in negation_words) and any(p in lowered for p in positive_words):
         if result["label"] == "Non-trigger":
             result["label"] = "Trigger"
 
-    # Case 3: Positive words alone → Non-trigger
+
     elif any(p in lowered for p in positive_words):
         if result["label"] == "Trigger":
             result["label"] = "Non-trigger"
