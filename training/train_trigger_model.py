@@ -1,46 +1,108 @@
-
-from transformers import AutoTokenizer, AutoModelForSequenceClassification
-import torch
-import os
-
-MODEL_PATH = os.path.join(
-    os.path.dirname(os.path.abspath(__file__)), 
-    "trigger_xlmr_model"
+import pandas as pd
+from sklearn.model_selection import train_test_split
+from datasets import Dataset
+from transformers import (
+    AutoTokenizer,
+    AutoModelForSequenceClassification,
+    TrainingArguments,
+    Trainer
 )
-tokenizer = AutoTokenizer.from_pretrained(MODEL_PATH)
-model = AutoModelForSequenceClassification.from_pretrained(MODEL_PATH)
-model.eval()
+import torch
+import numpy as np
+from sklearn.metrics import accuracy_score, precision_recall_fscore_support
 
-label_map = {0: "Non-trigger", 1: "Trigger"}
+import os
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+DATA_PATH = os.path.join(BASE_DIR, "..", "Data", "Memo_Dataset.csv")
+df = pd.read_csv(DATA_PATH)
 
-def isTrigger(text: str):
-    inputs = tokenizer(text, return_tensors="pt", truncation=True, padding=True, max_length=128)
-    with torch.no_grad():
-        outputs = model(**inputs)
-        probs = torch.nn.functional.softmax(outputs.logits, dim=-1)
-        pred_label = torch.argmax(probs, dim=1).item()
-        confidence = probs[0][pred_label].item()
 
-    result = {"label": label_map[pred_label], "confidence": confidence}
-    lowered = text.lower()
+df = df[['Question', 'Question_eng', 'Trigger']]
 
-    negation_words = ["not", "no", "never", "without", "don't", "didn't", "none"]
-    positive_words = ["fine", "okay", "good", "well", "better", "normal", "alright", "no issue", "not bad", "recovered"]
-    symptom_words = ["sick", "sad", "dizzy", "pain", "hurt", "tired", "depressed", "anxious", "headache"]
 
-    # Case 1: Negation + symptom → Non-trigger
-    if any(n in lowered for n in negation_words) and any(s in lowered for s in symptom_words):
-        if result["label"] == "Trigger":
-            result["label"] = "Non-trigger"
+df = df.rename(columns={'Trigger': 'label'})
 
-    # Case 2: Negation + positive → Trigger (reverse of earlier mistake)
-    elif any(n in lowered for n in negation_words) and any(p in lowered for p in positive_words):
-        if result["label"] == "Non-trigger":
-            result["label"] = "Trigger"
 
-    # Case 3: Positive words alone → Non-trigger
-    elif any(p in lowered for p in positive_words):
-        if result["label"] == "Trigger":
-            result["label"] = "Non-trigger"
+df_arabic = df[['Question', 'label']].rename(columns={'Question': 'text'})
+df_english = df[['Question_eng', 'label']].rename(columns={'Question_eng': 'text'})
 
-    return result
+
+df_combined = pd.concat([df_arabic, df_english], ignore_index=True)
+df_combined['label'] = df_combined['label'].astype(int)
+
+print("Dataset combined: ", df_combined.shape)
+print(df_combined['label'].value_counts())
+
+
+min_count = df_combined['label'].value_counts().min()
+df_balanced = (
+    df_combined.groupby('label', group_keys=False)
+    .apply(lambda x: x.sample(min_count, random_state=42))
+    .reset_index(drop=True)
+)
+
+print(" Balanced dataset:", len(df_balanced))
+print(df_balanced['label'].value_counts())
+
+
+train_df, val_df = train_test_split(
+    df_balanced, test_size=0.2, random_state=42, stratify=df_balanced['label']
+)
+
+train_dataset = Dataset.from_pandas(train_df)
+val_dataset = Dataset.from_pandas(val_df)
+
+MODEL_NAME = "xlm-roberta-base"
+tokenizer = AutoTokenizer.from_pretrained(MODEL_NAME)
+
+def preprocess_function(examples):
+    return tokenizer(examples["text"], truncation=True, padding='max_length', max_length=128)
+
+train_dataset = train_dataset.map(preprocess_function, batched=True)
+val_dataset = val_dataset.map(preprocess_function, batched=True)
+
+train_dataset.set_format(type='torch', columns=['input_ids', 'attention_mask', 'label'])
+val_dataset.set_format(type='torch', columns=['input_ids', 'attention_mask', 'label'])
+
+
+model = AutoModelForSequenceClassification.from_pretrained(
+    MODEL_NAME, num_labels=len(df_balanced['label'].unique())
+)
+
+def compute_metrics(pred):
+    labels = pred.label_ids
+    preds = np.argmax(pred.predictions, axis=1)
+    precision, recall, f1, _ = precision_recall_fscore_support(labels, preds, average='weighted')
+    acc = accuracy_score(labels, preds)
+    return {'accuracy': acc, 'f1': f1, 'precision': precision, 'recall': recall}
+
+
+
+training_args = TrainingArguments(
+    output_dir="./xlmr_trigger_model",
+    per_device_train_batch_size=8,
+    gradient_accumulation_steps=2,
+    num_train_epochs=5,
+    learning_rate=2e-5,
+    weight_decay=0.01,
+    logging_dir='./logs',
+    do_eval=True,
+)
+
+
+trainer = Trainer(
+    model=model,
+    args=training_args,
+    train_dataset=train_dataset,
+    eval_dataset=val_dataset,
+    tokenizer=tokenizer,
+    compute_metrics=compute_metrics,
+)
+
+trainer.train()
+
+
+model.save_pretrained("../models/trigger_xlmr_model")
+tokenizer.save_pretrained("../models/trigger_xlmr_model")
+
+print("Model saved to ../models/trigger_xlmr_model")
