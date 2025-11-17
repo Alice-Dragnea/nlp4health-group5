@@ -14,8 +14,24 @@
 - Chris Gomez
 - Tanvi Patel
 
-### Run Server
-in root-directory, run `python -m src.routes.trigger_route`
-
 ### Install Requirements
 `pip install -r requirements.txt`
+
+### Run Server
+
+**Step 1:** Install Node.js dependencies
+```bash
+npm install
+```
+
+**Step 2:** Start both servers (Python server + ngrok)
+```bash
+npm start
+```
+
+#### If you don't have an ngrok account:
+Run the following command and follow the instructions to set up your ngrok account:
+```bash
+ngrok config add-authtoken <your_token>
+```
+You can get your authtoken by signing up at [ngrok.com](https://ngrok.com) and visiting your [dashboard](https://dashboard.ngrok.com/get-started/your-authtoken).
