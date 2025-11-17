@@ -10,11 +10,17 @@ class CallUser:
     def __init__(self):
         self.phone_number = os.getenv('PHONE_NUMBER')
         self.agent_id = os.getenv('AGENT_ID')
-        self.model_name = "GPT"
         self.dm_api_key = os.getenv('VOICEFLOW_API_KEY')
+        self.models = ["GPT", "Claude"]
+        self.model_name = "GPT"
         self.transcript = Transcript()
 
     def call(self):
+        # check if model is valid
+        if self.model_name not in self.models:
+            print(f"Invalid model: {self.model_name}")
+            return None
+
         # Get current transcript IDs before the call
         initial_ids = self.transcript.get_transcript_ids()
 
