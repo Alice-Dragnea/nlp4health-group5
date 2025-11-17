@@ -1,0 +1,13 @@
+{
+  "name": "nlp4health-group5",
+  "version": "1.0.0",
+  "description": "NLP Health Project",
+  "scripts": {
+    "start": "concurrently \"python -m src.routes.trigger_route\" \"ngrok http 5000\"",
+    "server": "python -m src.routes.trigger_route",
+    "ngrok": "ngrok http 5000"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  }
+}
