@@ -29,7 +29,7 @@ npm install
 npm start
 ```
 
-### Fine Tuned Model ###
+### Fine Tuned Models ###
 (will insert table w links to hugging face model cards)
 
 #### If you don't have an ngrok account:
