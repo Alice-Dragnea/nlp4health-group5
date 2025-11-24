@@ -30,7 +30,7 @@ npm start
 ```
 
 ### Fine Tuned Models ###
-(will insert table w links to hugging face model cards)
+- https://huggingface.co/alicedr/arabic-ahd-ft
 
 #### If you don't have an ngrok account:
 Run the following command and follow the instructions to set up your ngrok account:
