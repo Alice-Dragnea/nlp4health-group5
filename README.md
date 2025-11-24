@@ -30,6 +30,7 @@ npm start
 ```
 
 ### Fine Tuned Models ###
+- https://huggingface.co/Tanvi0212/xlmr-trigger-detection
 - https://huggingface.co/alicedr/arabic-ahd-ft
 
 #### If you don't have an ngrok account:
