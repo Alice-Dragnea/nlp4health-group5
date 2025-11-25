@@ -31,7 +31,7 @@ npm start
 
 ### Fine Tuned Models ###
 - https://huggingface.co/Tanvi0212/xlmr-trigger-detection
-- https://huggingface.co/alicedr/arabic-ahd-ft
+- https://huggingface.co/alicedr/memo-llama-3b-instruct-arabic
 
 #### If you don't have an ngrok account:
 Run the following command and follow the instructions to set up your ngrok account:
