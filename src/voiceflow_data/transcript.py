@@ -1,6 +1,7 @@
 import requests
 import os
 from dotenv import load_dotenv
+import sys
 
 load_dotenv()
 
@@ -75,8 +76,15 @@ class Transcript:
         return conversation
 
 if __name__ == "__main__":
-    transcript = Transcript()
-    transcript_ids = transcript.get_transcript_ids()
-    print(f"Here are the transcript ids: {transcript_ids}")
-    conversation = transcript.get_transcript(transcript_ids[4])
-    print(f"Here is the conversation: {conversation}")
+    t = Transcript()
+    
+    # grabbing specific transcript.
+    if len(sys.argv) > 1:
+        transcript_id = sys.argv[1]
+        raw_transcript = t.get_transcript(transcript_id)
+        print(f"Here is the transcript:\n{raw_transcript}")
+    
+    # grabbing just the IDs if no ID is specified
+    else:
+        transcript_ids = t.get_transcript_ids()
+        print(f"Here are the transcript ids: {transcript_ids}")

@@ -3,6 +3,7 @@ import os
 import time
 from dotenv import load_dotenv
 from voiceflow_data.transcript import Transcript
+import os
 
 load_dotenv()
 
@@ -62,5 +63,11 @@ class CallUser:
 
 if __name__ == "__main__":
     call_user = CallUser()
+    
+    # Return Transcript ID
     transcript_id = call_user.call()
     print(f"Transcript ID: {transcript_id}")
+    
+    # Grab rel path
+    relative_path = f"python src/voiceflow_data/transcript.py {transcript_id}"
+    print(f"Run the following command to get the transcript: {relative_path}")
