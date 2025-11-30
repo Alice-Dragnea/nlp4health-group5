@@ -16,19 +16,30 @@ def isTriggerRoute():
     try:
         data = request.get_json()
 
-        # validate required fields
-        required_fields = ['side_effect']
-        for field in required_fields:
-            if field not in data:
-                return jsonify({
-                    'error': f'Missing or empty required field: {field}',
-                    'success': False
-                }), 400
+        # Validate input 
+        if "side_effect" not in data:
+            return jsonify({
+                'error': 'Missing required field: side_effect',
+                'success': False
+            }), 400
         
-        # TODO: implement trigger logic/model.
+        text = data["side_effect"]
+
+        # Dynamic model selection 
+        # If Voiceflow sends "model_id", use it
+        # Otherwise default to your best model
+        model_id = data.get(
+            "model_id",
+            "Tanvi0212/xlmr-trigger-eng-ar"     # default model
+        )
+
+        # Predict
+        result = isTrigger(text, model_id)
+
         return jsonify({
             'success': True,
-            'is_trigger': isTrigger(data['side_effect'])
+            'model_used': model_id,
+            'prediction': result
         }), 200
 
     except Exception as e:
@@ -37,9 +48,10 @@ def isTriggerRoute():
             'success': False
         }), 500
 
+
 if __name__ == '__main__':
     trigger_route.run(
-        host='0.0.0.0', 
-        port=int(os.getenv('PORT', 5000)), 
+        host='0.0.0.0',
+        port=int(os.getenv('PORT', 5000)),
         debug=True
     )
