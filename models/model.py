@@ -17,7 +17,7 @@ def load_model(model_id: str):
     Cached after first load -> no slowdown.
     """
     if model_id not in model_cache:
-        print(f"🔄 Loading model from Hugging Face: {model_id}")
+        print(f"Loading model from Hugging Face: {model_id}")
 
         tokenizer_cache[model_id] = AutoTokenizer.from_pretrained(model_id)
         model_cache[model_id] = AutoModelForSequenceClassification.from_pretrained(model_id)

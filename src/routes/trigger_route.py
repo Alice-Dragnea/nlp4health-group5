@@ -26,11 +26,11 @@ def isTriggerRoute():
         text = data["side_effect"]
 
         # Dynamic model selection 
-        # If Voiceflow sends "model_id", use it
+        # If Voiceflow sends "model_id" or "model_name", use it
         # Otherwise default to your best model
         model_id = data.get(
             "model_id",
-            "Tanvi0212/xlmr-trigger-eng-ar"     # default model
+            data.get("model_name", "Tanvi0212/xlmr-trigger-eng-ar")  # accept both model_id and model_name
         )
 
         # Predict
