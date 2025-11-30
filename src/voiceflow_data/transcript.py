@@ -64,15 +64,15 @@ class Transcript:
                     })
             
             # User messages (text input from user)
-            elif log.get('type') == 'action' and log.get('data', {}).get('type') == 'text':
-                message = log['data'].get('payload', '')
+            elif log.get('type') == 'action' and log.get('data', {}).get('type') == 'message':
+                message = log['data']['payload'].get('message', '')
                 if message:  # Only add if there's actual content
                     conversation.append({
                         'speaker': 'user',
                         'message': message,
                         'timestamp': log.get('createdAt')
                     })
-        
+
         return conversation
 
 if __name__ == "__main__":
