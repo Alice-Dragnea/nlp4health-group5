@@ -12,8 +12,8 @@ class CallUser:
         self.phone_number = os.getenv('PHONE_NUMBER')
         self.agent_id = os.getenv('AGENT_ID')
         self.dm_api_key = os.getenv('VOICEFLOW_API_KEY')
-        self.models = ["GPT", "Claude", "Tanvi0212/xlmr-english-downsampled", "Tanvi0212/xlmr-arabic-downsampled"]
-        self.model_name = "Tanvi0212/xlmr-english-downsampled"
+        self.models = ["GPT", "Claude", "Tanvi0212/xlmr-trigger-eng-ar", "Tanvi0212/xlmr-english-downsampled", "Tanvi0212/xlmr-arabic-downsampled"]
+        self.model_name = "GPT"
         self.transcript = Transcript()
 
     def call(self):
