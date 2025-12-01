@@ -35,11 +35,13 @@ def isTriggerRoute():
 
         # Predict
         result = isTrigger(text, model_id)
+        if result["label"] == "Trigger":
+            is_trigger = "True"
+        else:
+            is_trigger = "False"
 
         return jsonify({
-            'success': True,
-            'model_used': model_id,
-            'prediction': result
+            'is_trigger': is_trigger
         }), 200
 
     except Exception as e:
