@@ -30,7 +30,7 @@ def isTriggerRoute():
         # Otherwise default to your best model
         model_id = data.get(
             "model_id",
-            data.get("model_name", "Tanvi0212/xlmr-trigger-eng-ar")  # accept both model_id and model_name
+            data.get("model_name", "Tanvi0212/xlmr-trigger-detection")  # accept both model_id and model_name
         )
 
         # Predict
