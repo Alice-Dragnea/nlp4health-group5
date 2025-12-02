@@ -15,12 +15,12 @@ class CallUser:
         self.models = [
             "GPT", 
             "Claude", 
-            "Tanvi0212/xlmr-arabic-downsampled", 
-            "Tanvi0212/xlmr-english-downsampled", 
-            "Tanvi0212/XLM-Roberta_downsampled/tree/main", 
+            "Tanvi0212/xlmr-english-downsampled",
+            "Tanvi0212/XLM-Roberta_downsampled",
+            "Tanvi0212/xlmr-arabic-downsampled",
             "Tanvi0212/xlmr-trigger-detection"
         ]
-        self.model_name = "Tanvi0212/xlmr-trigger-detection"
+        self.model_name = "Tanvi0212/xlmr-english-downsampled"
         self.transcript = Transcript()
 
     def call(self):
