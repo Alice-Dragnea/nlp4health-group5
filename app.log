@@ -245,3 +245,91 @@
 2025-12-02 08:58:26,348 - trigger_route - INFO - Result: {'label': 'Trigger', 'confidence': 0.9177570939064026}
 2025-12-02 08:58:26,349 - trigger_route - INFO - Score: 0.9177570939064026
 2025-12-02 08:58:26,351 - werkzeug - INFO - 127.0.0.1 - - [02/Dec/2025 08:58:26] "POST /isTrigger HTTP/1.1" 200 -
+2025-12-02 09:02:15,925 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://10.2.79.54:5000
+2025-12-02 09:02:15,926 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-12-02 09:02:15,934 - werkzeug - INFO -  * Restarting with stat
+2025-12-02 09:02:47,613 - werkzeug - WARNING -  * Debugger is active!
+2025-12-02 09:02:47,643 - werkzeug - INFO -  * Debugger PIN: 746-186-723
+2025-12-02 09:03:05,682 - trigger_route - INFO - Received data: {'side_effect': 'I feel great', 'model_name': 'Tanvi0212/XLM-Roberta_downsampled'}
+2025-12-02 09:03:11,553 - trigger_route - INFO - Result: {'label': 'Trigger', 'confidence': 0.8188736438751221}
+2025-12-02 09:03:11,554 - trigger_route - INFO - Score: 0.8188736438751221
+2025-12-02 09:03:11,557 - werkzeug - INFO - 127.0.0.1 - - [02/Dec/2025 09:03:11] "POST /isTrigger HTTP/1.1" 200 -
+2025-12-02 09:03:15,296 - trigger_route - INFO - Received data: {'side_effect': 'I feel great', 'model_name': 'Tanvi0212/XLM-Roberta_downsampled'}
+2025-12-02 09:03:15,397 - trigger_route - INFO - Result: {'label': 'Trigger', 'confidence': 0.8188736438751221}
+2025-12-02 09:03:15,399 - trigger_route - INFO - Score: 0.8188736438751221
+2025-12-02 09:03:15,402 - werkzeug - INFO - 127.0.0.1 - - [02/Dec/2025 09:03:15] "POST /isTrigger HTTP/1.1" 200 -
+2025-12-02 09:03:25,883 - trigger_route - INFO - Received data: {'side_effect': 'I feel great', 'model_name': 'Tanvi0212/XLM-Roberta_downsampled'}
+2025-12-02 09:03:26,079 - trigger_route - INFO - Result: {'label': 'Trigger', 'confidence': 0.8188736438751221}
+2025-12-02 09:03:26,079 - trigger_route - INFO - Score: 0.8188736438751221
+2025-12-02 09:03:26,081 - werkzeug - INFO - 127.0.0.1 - - [02/Dec/2025 09:03:26] "POST /isTrigger HTTP/1.1" 200 -
+2025-12-02 09:04:27,688 - trigger_route - INFO - Received data: {'side_effect': 'After taking the medication, i feel great', 'model_name': 'Tanvi0212/xlmr-english-downsampled'}
+2025-12-02 09:05:19,111 - trigger_route - INFO - Result: {'label': 'Trigger', 'confidence': 0.8751572370529175}
+2025-12-02 09:05:19,112 - trigger_route - INFO - Score: 0.8751572370529175
+2025-12-02 09:05:19,113 - werkzeug - INFO - 127.0.0.1 - - [02/Dec/2025 09:05:19] "POST /isTrigger HTTP/1.1" 200 -
+2025-12-02 09:05:43,723 - trigger_route - INFO - Received data: {'side_effect': 'I feel good', 'model_name': 'Tanvi0212/xlmr-english-downsampled'}
+2025-12-02 09:05:43,807 - trigger_route - INFO - Result: {'label': 'Non-trigger', 'confidence': 0.6269811391830444}
+2025-12-02 09:05:43,808 - trigger_route - INFO - Score: 0.6269811391830444
+2025-12-02 09:05:43,809 - werkzeug - INFO - 127.0.0.1 - - [02/Dec/2025 09:05:43] "POST /isTrigger HTTP/1.1" 200 -
+2025-12-02 09:05:49,993 - trigger_route - INFO - Received data: {'side_effect': 'I feel awesome', 'model_name': 'Tanvi0212/xlmr-english-downsampled'}
+2025-12-02 09:05:50,082 - trigger_route - INFO - Result: {'label': 'Non-trigger', 'confidence': 0.7825672030448914}
+2025-12-02 09:05:50,082 - trigger_route - INFO - Score: 0.7825672030448914
+2025-12-02 09:05:50,085 - werkzeug - INFO - 127.0.0.1 - - [02/Dec/2025 09:05:50] "POST /isTrigger HTTP/1.1" 200 -
+2025-12-02 09:06:02,087 - trigger_route - INFO - Received data: {'side_effect': 'After taking the medication, sometimes i feel tried', 'model_name': 'Tanvi0212/xlmr-english-downsampled'}
+2025-12-02 09:06:02,216 - trigger_route - INFO - Result: {'label': 'Trigger', 'confidence': 0.9322658181190491}
+2025-12-02 09:06:02,216 - trigger_route - INFO - Score: 0.9322658181190491
+2025-12-02 09:06:02,218 - werkzeug - INFO - 127.0.0.1 - - [02/Dec/2025 09:06:02] "POST /isTrigger HTTP/1.1" 200 -
+2025-12-02 09:06:18,054 - trigger_route - INFO - Received data: {'side_effect': 'I feel great', 'model_name': 'Tanvi0212/XLM-Roberta_downsampled'}
+2025-12-02 09:06:18,157 - trigger_route - INFO - Result: {'label': 'Trigger', 'confidence': 0.8188736438751221}
+2025-12-02 09:06:18,157 - trigger_route - INFO - Score: 0.8188736438751221
+2025-12-02 09:06:18,159 - werkzeug - INFO - 127.0.0.1 - - [02/Dec/2025 09:06:18] "POST /isTrigger HTTP/1.1" 200 -
+2025-12-02 11:48:54,353 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://10.1.84.211:5000
+2025-12-02 11:48:54,354 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-12-02 11:48:54,361 - werkzeug - INFO -  * Restarting with stat
+2025-12-02 11:49:11,666 - werkzeug - WARNING -  * Debugger is active!
+2025-12-02 11:49:11,679 - werkzeug - INFO -  * Debugger PIN: 746-186-723
+2025-12-02 11:53:23,416 - trigger_route - INFO - Received data: {'side_effect': 'Reports frequent dizziness when taking medication.', 'model_name': 'Tanvi0212/xlmr-english-downsampled'}
+2025-12-02 11:53:26,714 - trigger_route - INFO - Result: {'label': 'Trigger', 'confidence': 0.9302740693092346}
+2025-12-02 11:53:26,714 - trigger_route - INFO - Score: 0.9302740693092346
+2025-12-02 11:53:26,716 - werkzeug - INFO - 127.0.0.1 - - [02/Dec/2025 11:53:26] "POST /isTrigger HTTP/1.1" 200 -
+2025-12-02 17:22:55,779 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://10.1.84.211:5000
+2025-12-02 17:22:55,780 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-12-02 17:22:55,782 - werkzeug - INFO -  * Restarting with stat
+2025-12-02 17:23:05,179 - werkzeug - WARNING -  * Debugger is active!
+2025-12-02 17:23:05,193 - werkzeug - INFO -  * Debugger PIN: 746-186-723
+2025-12-02 17:25:42,468 - trigger_route - INFO - Received data: {'side_effect': 'Reports dizziness after taking medication.', 'model_name': 'Tanvi0212/xlmr-english-downsampled'}
+2025-12-02 17:25:44,450 - trigger_route - INFO - Result: {'label': 'Trigger', 'confidence': 0.9325019717216492}
+2025-12-02 17:25:44,450 - trigger_route - INFO - Score: 0.9325019717216492
+2025-12-02 17:25:44,452 - werkzeug - INFO - 127.0.0.1 - - [02/Dec/2025 17:25:44] "POST /isTrigger HTTP/1.1" 200 -
+2025-12-02 17:34:47,373 - trigger_route - INFO - Received data: {'side_effect': 'Reports feeling faint and dizzy a few hours after taking medication.', 'model_name': 'Tanvi0212/xlmr-english-downsampled'}
+2025-12-02 17:34:47,475 - trigger_route - INFO - Result: {'label': 'Trigger', 'confidence': 0.951560378074646}
+2025-12-02 17:34:47,475 - trigger_route - INFO - Score: 0.951560378074646
+2025-12-02 17:34:47,476 - werkzeug - INFO - 127.0.0.1 - - [02/Dec/2025 17:34:47] "POST /isTrigger HTTP/1.1" 200 -
+2025-12-02 19:26:34,428 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://10.1.84.211:5000
+2025-12-02 19:26:34,429 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-12-02 19:26:34,432 - werkzeug - INFO -  * Restarting with stat
+2025-12-02 19:26:48,207 - werkzeug - WARNING -  * Debugger is active!
+2025-12-02 19:26:48,225 - werkzeug - INFO -  * Debugger PIN: 746-186-723
+2025-12-02 19:27:08,688 - trigger_route - INFO - Received data: {'side_effect': 'After taking the medication, sometimes i feel tried', 'model_name': 'Tanvi0212/xlmr-english-downsampled'}
+2025-12-02 19:27:12,093 - trigger_route - INFO - Result: {'label': 'Trigger', 'confidence': 0.9322658181190491}
+2025-12-02 19:27:12,093 - trigger_route - INFO - Score: 0.9322658181190491
+2025-12-02 19:27:12,095 - werkzeug - INFO - 127.0.0.1 - - [02/Dec/2025 19:27:12] "POST /isTrigger HTTP/1.1" 200 -
+2025-12-02 19:27:22,020 - trigger_route - INFO - Received data: {'side_effect': 'After taking the medication, sometimes i feel tried but its alright', 'model_name': 'Tanvi0212/xlmr-english-downsampled'}
+2025-12-02 19:27:22,150 - trigger_route - INFO - Result: {'label': 'Non-trigger', 'confidence': 0.8305271863937378}
+2025-12-02 19:27:22,150 - trigger_route - INFO - Score: 0.8305271863937378
+2025-12-02 19:27:22,152 - werkzeug - INFO - 127.0.0.1 - - [02/Dec/2025 19:27:22] "POST /isTrigger HTTP/1.1" 200 -
+2025-12-02 19:27:30,378 - trigger_route - INFO - Received data: {'side_effect': 'After taking the medication, sometimes i feel tried', 'model_name': 'Tanvi0212/xlmr-english-downsampled'}
+2025-12-02 19:27:30,444 - trigger_route - INFO - Result: {'label': 'Trigger', 'confidence': 0.9322658181190491}
+2025-12-02 19:27:30,445 - trigger_route - INFO - Score: 0.9322658181190491
+2025-12-02 19:27:30,445 - werkzeug - INFO - 127.0.0.1 - - [02/Dec/2025 19:27:30] "POST /isTrigger HTTP/1.1" 200 -
