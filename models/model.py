@@ -1,10 +1,9 @@
 from transformers import AutoTokenizer, AutoModelForSequenceClassification
 import torch
 
+# -----------------------------
 # DYNAMIC MODEL CACHE
-# We load each HF model only once the first time it is requested.
-# After that, we reuse it from memory (super fast).
-
+# -----------------------------
 model_cache = {}
 tokenizer_cache = {}
 
@@ -14,10 +13,10 @@ label_map = {0: "Non-trigger", 1: "Trigger"}
 def load_model(model_id: str):
     """
     Load a Hugging Face model dynamically.
-    Cached after first load -> no slowdown.
+    Cached after first load → super fast next time.
     """
     if model_id not in model_cache:
-        print(f"🔄 Loading model from Hugging Face: {model_id}")
+        print(f" Loading model from Hugging Face: {model_id}")
 
         tokenizer_cache[model_id] = AutoTokenizer.from_pretrained(model_id)
         model_cache[model_id] = AutoModelForSequenceClassification.from_pretrained(model_id)
@@ -28,9 +27,9 @@ def load_model(model_id: str):
     return tokenizer_cache[model_id], model_cache[model_id]
 
 
-
+# -----------------------------
 # MAIN TRIGGER FUNCTION
-
+# -----------------------------
 def isTrigger(text: str, model_id: str):
     """
     Run prediction using dynamically selected HF model.
@@ -57,16 +56,37 @@ def isTrigger(text: str, model_id: str):
         "confidence": float(confidence)
     }
 
-    # RULE-BASED ADJUSTMENTS
-   
+    # -----------------------------------------
+    # RULE-BASED CORRECTION LAYER
+    # -----------------------------------------
     lowered = text.lower().strip()
 
-    negation_words = ["not", "no", "never", "without", "don't", "didn't", "none",
-                      "can't", "isn't", "aren't", "won't"]
-    positive_words = ["fine", "okay", "good", "well", "better", "normal",
-                      "alright", "no issue", "not bad", "recovered"]
-    symptom_words = ["sick", "sad", "dizzy", "pain", "hurt", "tired",
-                     "depressed", "anxious", "headache"]
+    negation_words = [
+        "not", "no", "never", "without", "don't", "didn't", "none",
+        "can't", "isn't", "aren't", "won't"
+    ]
+
+    positive_words = [
+        "fine", "okay", "good", "well", "better", "normal", "alright",
+        "no issue", "not bad", "recovered", "great", "awesome"
+    ]
+
+    symptom_words = [
+        "sick", "sad", "dizzy", "pain", "hurt", "tired",
+        "depressed", "anxious", "headache"
+    ]
+
+    # NEW RULE YOU ASKED TO ADD:  
+    # Explicit strong positive health statements → Non-trigger
+    strong_positive_statements = [
+        "i feel great", "i feel awesome", "i feel fine",
+        "i feel much better", "i'm good", "doing better",
+        "feeling better", "i feel okay", "i feel normal"
+    ]
+
+    if any(phrase in lowered for phrase in strong_positive_statements):
+        result["label"] = "Non-trigger"
+        return result
 
     # Case 1: Negation + symptom → Non-trigger
     if any(n in lowered for n in negation_words) and any(s in lowered for s in symptom_words):
@@ -76,11 +96,11 @@ def isTrigger(text: str, model_id: str):
     elif any(n in lowered for n in negation_words) and any(p in lowered for p in positive_words):
         result["label"] = "Trigger"
 
-    # Case 3: Positive words alone → Non-trigger
+    # Case 3: Positive alone → Non-trigger
     elif any(p in lowered for p in positive_words):
         result["label"] = "Non-trigger"
 
-    # Optional: low confidence → assume safe
+    # Confidence-based fallback (low confidence → safe = non-trigger)
     if result["confidence"] < 0.55:
         result["label"] = "Non-trigger"
 
