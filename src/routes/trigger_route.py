@@ -4,6 +4,18 @@ import sys
 project_root = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 sys.path.append(project_root)
 
+import logging
+
+# Configure logging to output to both console and file
+logging.basicConfig(
+    level=logging.INFO,
+    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
+    handlers=[
+        logging.FileHandler('app.log'),
+        logging.StreamHandler()  # This ensures output goes to console
+    ]
+)
+
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 from models.model import isTrigger
@@ -24,22 +36,28 @@ def isTriggerRoute():
             }), 400
         
         text = data["side_effect"]
+        trigger_route.logger.info(f"Received data: {data}")
 
         # Dynamic model selection 
-        # If Voiceflow sends "model_id", use it
+        # If Voiceflow sends "model_id" or "model_name", use it
         # Otherwise default to your best model
         model_id = data.get(
             "model_id",
-            "Tanvi0212/xlmr-trigger-eng-ar"     # default model
+            data.get("model_name", "Tanvi0212/xlmr-trigger-detection")  # accept both model_id and model_name
         )
 
         # Predict
         result = isTrigger(text, model_id)
+        if result["label"] == "Trigger":
+            is_trigger = "True"
+        else:
+            is_trigger = "False"
+
+        trigger_route.logger.info(f"Result: {result}")
+        trigger_route.logger.info(f"Score: {result['confidence']}")
 
         return jsonify({
-            'success': True,
-            'model_used': model_id,
-            'prediction': result
+            'is_trigger': is_trigger
         }), 200
 
     except Exception as e:
