@@ -43,7 +43,7 @@ class CallUser:
             'to': self.phone_number,
             'variables': {
                 'model_name': self.model_name,
-                'server_url' : self.server_url
+                'server_url' : self.server_url + "/isTrigger"
             }
         }
 
