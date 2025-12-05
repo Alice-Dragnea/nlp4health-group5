@@ -589,3 +589,15 @@
 2025-12-04 23:37:09,452 - trigger_route - INFO - Result: {'label': 'Trigger', 'confidence': 0.9102376103401184}
 2025-12-04 23:37:09,452 - trigger_route - INFO - Score: 0.9102376103401184
 2025-12-04 23:37:09,453 - werkzeug - INFO - 127.0.0.1 - - [04/Dec/2025 23:37:09] "POST /isTrigger HTTP/1.1" 200 -
+2025-12-04 23:56:24,419 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://10.1.84.211:5000
+2025-12-04 23:56:24,420 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-12-04 23:56:24,422 - werkzeug - INFO -  * Restarting with stat
+2025-12-04 23:56:36,269 - werkzeug - WARNING -  * Debugger is active!
+2025-12-04 23:56:36,290 - werkzeug - INFO -  * Debugger PIN: 746-186-723
+2025-12-05 00:00:48,004 - trigger_route - INFO - Received data: {'side_effect': "Yeah. I've noticed that I get a little sleepy after taking the medication, but I think it's okay.", 'model_name': 'Tanvi0212/xlmr-english-downsampled'}
+2025-12-05 00:00:49,880 - trigger_route - INFO - Result: {'label': 'Trigger', 'confidence': 0.8244166374206543}
+2025-12-05 00:00:49,880 - trigger_route - INFO - Score: 0.8244166374206543
+2025-12-05 00:00:49,881 - werkzeug - INFO - 127.0.0.1 - - [05/Dec/2025 00:00:49] "POST /isTrigger HTTP/1.1" 200 -

@@ -11,6 +11,7 @@
 ### Important Links
 #### Documents/Spreadsheets
 - [📄 **View Project Proposal Here**](https://www.overleaf.com/read/jszhhtpmhzrb#ffa4ec)
+- [📄 **View Final Report Here**](https://www.overleaf.com/project/68da8b1df9ea8587fe5f101f)
 - [📄 **View xlmr Fine-Tuned Model Here**](https://huggingface.co/Tanvi0212/xlmr-trigger-detection)
 - [📂 **View Results Here**](https://docs.google.com/spreadsheets/d/1bBvk63JCNymb4DyvAP-VND0TkycZqlc4Z8M_U7rAlvI/edit?usp=sharing)
 
