@@ -83,3 +83,4 @@ You have two options for running Voiceflow:
    ```
 
 This option uses our fine-tuned models for more accurate symptom classification.
+**Note:** We recommend calling our API endpoint ONCE before performing a Voiceflow call to ensure the Finetuned model is cached
