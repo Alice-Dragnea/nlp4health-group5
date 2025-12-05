@@ -10,6 +10,7 @@ load_dotenv()
 class CallUser:
     def __init__(self):
         self.phone_number = os.getenv('PHONE_NUMBER')
+        self.server_url = os.getenv('SERVER_URL')
         self.agent_id = os.getenv('AGENT_ID')
         self.dm_api_key = os.getenv('VOICEFLOW_API_KEY')
         self.models = [
@@ -41,7 +42,8 @@ class CallUser:
         data = {
             'to': self.phone_number,
             'variables': {
-                'model_name': self.model_name
+                'model_name': self.model_name,
+                'server_url' : self.server_url
             }
         }
 
