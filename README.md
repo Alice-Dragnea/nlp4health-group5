@@ -72,8 +72,7 @@ You have two options for running Voiceflow:
 **Setup Steps:**
 1. Complete the prerequisites and start the server (see sections above)
 2. Create a `.env` file in the root directory with your Voiceflow credentials
-   - Contact Chris Gomez for the required Voiceflow information
-   - Add your ngrok server URL to the environment variables
+   - Use the `.env.example` file as your `.env` file
 3. Run the phone call script:
    ```bash
    # Windows
