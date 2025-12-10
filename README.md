@@ -12,12 +12,16 @@
 #### Documents/Spreadsheets
 - [📄 **View Project Proposal Here**](https://www.overleaf.com/read/jszhhtpmhzrb#ffa4ec)
 - [📄 **View Final Report Here**](https://www.overleaf.com/project/68da8b1df9ea8587fe5f101f)
-- [📄 **View xlmr Fine-Tuned Model Here**](https://huggingface.co/Tanvi0212/xlmr-trigger-detection)
-- [📂 **View Results Here**](https://docs.google.com/spreadsheets/d/1bBvk63JCNymb4DyvAP-VND0TkycZqlc4Z8M_U7rAlvI/edit?usp=sharing)
+- [📂 **View Group Colab Drive Here**](https://drive.google.com/drive/folders/1RVIeYD97FFw62jx1QYs6KvorASOFZ7K_?usp=sharing)
+- [📂 **View Sample Results Here. Note: This spreadsheet contains sample test set results used for project development and is NOT our final evaluation**]([https://docs.google.com/spreadsheets/d/1bBvk63JCNymb4DyvAP-VND0TkycZqlc4Z8M_U7rAlvI/edit?usp=sharing](https://docs.google.com/spreadsheets/d/1bBvk63JCNymb4DyvAP-VND0TkycZqlc4Z8M_U7rAlvI/edit?usp=sharing))
 
 #### Resources
 - [🤖 **View Voiceflow Agentic Workflow Here (note, you will need to create a Voiceflow account)**](https://creator.voiceflow.com/dashboard?import=68de9e53c3844d1b755d9175)
-- [🤗 **View llama-3b Fine-Tuned Model Here**](https://huggingface.co/alicedr/memo-llama-3b-instruct-arabic)
+- [🤗 **View llama3b-8b-Instruct Fine-Tuned Model Here**](https://huggingface.co/alicedr/memo-llama3-8b-instruct-arabic/blob/main/README.md)
+- [🤗 **View Fine Tuned xlmr-arabic-downsampled Model Here**](https://huggingface.co/Tanvi0212/xlmr-arabic-downsampled)
+- [🤗 **View Fine Tuned xlmr-english-downsampled Model Here**](https://huggingface.co/Tanvi0212/xlmr-english-downsampled)
+- [🤗 **View Fine Tuned XLM-Roberta_downsampled Model Here**](https://huggingface.co/Tanvi0212/XLM-Roberta_downsampled/tree/main)
+
 
 ---
 
